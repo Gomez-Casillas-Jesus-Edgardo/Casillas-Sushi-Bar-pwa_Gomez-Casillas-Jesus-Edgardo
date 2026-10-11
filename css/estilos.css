@@ -1,0 +1,245 @@
+* { box-sizing: border-box; }
+
+:root {
+  --color-rojo: #DC2626;      /* Rojo principal */
+  --color-oscuro: #111827;    /* Fondo header y footer */
+  --color-fondo: #F9FAFB;     /* Fondo general */
+  --color-blanco: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-oscuro);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- ENCABEZADO (SOLO SE CORRIGE LA PARTE DE ARRIBA) --- */
+.appbar {
+  background: var(--color-oscuro);
+  color: var(--color-blanco);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0; /* Evita desbordamientos en móvil */
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: white;
+  padding: 2px;
+  flex-shrink: 0; /* Impide que la imagen se deforme */
+}
+
+.brand h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-blanco);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pill {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: .25rem .65rem;
+  font-size: .75rem;
+  color: var(--color-blanco);
+  white-space: nowrap;
+  flex-shrink: 0; /* Evita que la píldora se aplaste o se corte a la derecha */
+}
+
+.pill.sin-conexion { background: var(--color-rojo); }
+
+main {
+  max-width: 720px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  flex: 1;
+  width: 100%;
+}
+
+section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* .grid: acomoda las tarjetas de producto en columnas que se ajustan solas */
+.grid {
+  display: grid;
+  gap: .75rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.producto {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: .75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Aplica tanto al contenedor de la foto como a imágenes directas insertadas por csr.js */
+.producto img,
+.producto__foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: .5rem;
+  background: #f1f5f4;
+}
+
+.producto strong { display: block; margin-bottom: .25rem; }
+
+/* El precio resalta en rojo #DC2626 */
+.producto .precio { color: var(--color-rojo); font-weight: bold; }
+
+/* Tarjetas esqueleto (ver index.html): ocupan el mismo espacio que las reales
+   mientras llega catalogo.json, así nada se mueve de lugar (CLS ≈ 0) */
+.producto--cargando strong,
+.producto--cargando .precio,
+.producto--cargando p {
+  background: #e5e7eb;
+  border-radius: 4px;
+  color: transparent;
+}
+.producto--cargando strong { width: 70%; }
+.producto--cargando .precio { display: inline-block; width: 30%; }
+.producto--cargando p { width: 45%; }
+.producto--cargando button { visibility: hidden; }
+
+button {
+  background: var(--color-rojo);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  font-size: .9rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+button:hover { background: #b91c1c; }
+
+.mensaje { color: #374151; font-size: .9rem; min-height: 1.2em; }
+.mensaje a { color: var(--color-rojo); }
+
+.sucursal-info { color: #374151; font-size: .9rem; margin: 0 0 .6rem; }
+
+/* .mapa: contenedor de Leaflet. Necesita una altura explícita en px/rem;
+   si se deja en 0 o "auto", Leaflet no tiene dónde dibujar los tiles. */
+.mapa {
+  height: 260px;
+  border-radius: 8px;
+  margin-top: .75rem;
+  border: 1px solid #e5e7eb;
+}
+
+/* #carrito-lista: cada renglón separa nombre / cantidad (con +/-) / precio /
+   quitar en columnas propias, en vez de un solo texto "Nombre x2" pegado. */
+#carrito-lista { list-style: none; padding: 0; }
+#carrito-lista li {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: .6rem;
+  border-bottom: 1px solid #f3f4f6;
+  padding: .5rem 0;
+}
+
+.carrito-nombre { font-weight: 600; }
+
+.carrito-cantidad {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.carrito-cantidad button {
+  padding: .1rem .55rem;
+  font-size: .95rem;
+  line-height: 1.4;
+}
+.carrito-cantidad__valor {
+  min-width: 1.4rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.carrito-precio { font-weight: bold; color: var(--color-rojo); white-space: nowrap; }
+
+.carrito-quitar {
+  background: transparent;
+  color: #b23b3b;
+  border: 1px solid #e3b8b8;
+  padding: .25rem .6rem;
+  font-size: .8rem;
+}
+.carrito-quitar:hover { background: #fbeaea; color: #8f2d2d; }
+
+/* PIE DE PÁGINA */
+.footer {
+  background: var(--color-oscuro);
+  color: var(--color-blanco);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: auto;
+  border-top: 3px solid var(--color-rojo);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+@media (max-width: 480px) {
+  #carrito-lista li { grid-template-columns: 1fr auto; grid-template-areas: "nombre nombre" "cantidad precio" "quitar quitar"; }
+  .carrito-nombre { grid-area: nombre; }
+  .carrito-cantidad { grid-area: cantidad; }
+  .carrito-precio { grid-area: precio; justify-self: end; }
+  .carrito-quitar { grid-area: quitar; justify-self: start; }
+}
+
+.datos-header {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.datos-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center; /* Asegura el centrado del texto */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem; /* Separación sutil entre el texto y la estrella */
+}
+
+.estrellita {
+  color: var(--color-rojo);
+  font-size: 1.1rem;
+}
