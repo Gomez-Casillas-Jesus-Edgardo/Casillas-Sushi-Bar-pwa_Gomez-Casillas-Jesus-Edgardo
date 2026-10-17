@@ -17,7 +17,7 @@ body {
   min-height: 100vh;
 }
 
-/* --- ENCABEZADO (SOLO SE CORRIGE LA PARTE DE ARRIBA) --- */
+/* --- ENCABEZADO RESPONSIVO --- */
 .appbar {
   background: var(--color-oscuro);
   color: var(--color-blanco);
@@ -50,6 +50,7 @@ body {
   font-weight: 700;
   margin: 0;
   color: var(--color-blanco);
+  white-space: nowrap; /* Mantiene el nombre en una sola línea */
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -61,7 +62,7 @@ body {
   font-size: .75rem;
   color: var(--color-blanco);
   white-space: nowrap;
-  flex-shrink: 0; /* Evita que la píldora se aplaste o se corte a la derecha */
+  flex-shrink: 0; /* Evita que la píldora se aplaste o se corte */
 }
 
 .pill.sin-conexion { background: var(--color-rojo); }
@@ -80,6 +81,36 @@ section {
   border-radius: 10px;
   padding: 1rem 1.25rem;
   margin-bottom: 1rem;
+}
+
+/* --- BOTONES DE FILTRO POR CATEGORÍA --- */
+.filtros-categoria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.btn-filtro {
+  background: #E5E7EB;
+  color: #111827;
+  border: 1px solid #D1D5DB;
+  border-radius: 20px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-filtro:hover {
+  background: #D1D5DB;
+}
+
+.btn-filtro.activo {
+  background: var(--color-rojo);
+  color: #FFFFFF;
+  border-color: var(--color-rojo);
 }
 
 /* .grid: acomoda las tarjetas de producto en columnas que se ajustan solas */
@@ -197,33 +228,27 @@ button:hover { background: #b91c1c; }
 }
 .carrito-quitar:hover { background: #fbeaea; color: #8f2d2d; }
 
-/* PIE DE PÁGINA */
+/* --- PIE DE PÁGINA (DATOS DEL NEGOCIO CENTRADOS Y BLANCOS) --- */
 .footer {
   background: var(--color-oscuro);
   color: var(--color-blanco);
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 1.75rem 1rem;
   margin-top: auto;
   border-top: 3px solid var(--color-rojo);
+  display: flex;
+  justify-content: center;
 }
 
-.footer p {
-  margin: 0;
-  font-size: 0.85rem;
-  color: #9ca3af;
-}
-
-@media (max-width: 480px) {
-  #carrito-lista li { grid-template-columns: 1fr auto; grid-template-areas: "nombre nombre" "cantidad precio" "quitar quitar"; }
-  .carrito-nombre { grid-area: nombre; }
-  .carrito-cantidad { grid-area: cantidad; }
-  .carrito-precio { grid-area: precio; justify-self: end; }
-  .carrito-quitar { grid-area: quitar; justify-self: start; }
+.datos-negocio-directo {
+  max-width: 720px;
+  width: 100%;
+  color: #FFFFFF;
 }
 
 .datos-header {
   display: flex;
-  justify-content: center; /* Centra el contenido horizontalmente */
+  justify-content: center;
   align-items: center;
   margin-bottom: 0.5rem;
 }
@@ -233,13 +258,37 @@ button:hover { background: #b91c1c; }
   font-size: 1.15rem;
   font-weight: 700;
   color: #FFFFFF;
-  text-align: center; /* Asegura el centrado del texto */
+  text-align: center;
   display: flex;
   align-items: center;
-  gap: 0.4rem; /* Separación sutil entre el texto y la estrella */
+  gap: 0.4rem;
 }
 
 .estrellita {
   color: var(--color-rojo);
   font-size: 1.1rem;
+}
+
+.datos-linea {
+  margin: 0 0 0.35rem 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #E5E7EB;
+}
+
+.datos-linea:last-child {
+  margin-bottom: 0;
+}
+
+.datos-linea strong {
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+@media (max-width: 480px) {
+  #carrito-lista li { grid-template-columns: 1fr auto; grid-template-areas: "nombre nombre" "cantidad precio" "quitar quitar"; }
+  .carrito-nombre { grid-area: nombre; }
+  .carrito-cantidad { grid-area: cantidad; }
+  .carrito-precio { grid-area: precio; justify-self: end; }
+  .carrito-quitar { grid-area: quitar; justify-self: start; }
 }

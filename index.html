@@ -10,8 +10,8 @@
 
   <!-- Estas 3 líneas son las que convierten este sitio en una PWA instalable -->
   <link rel="manifest" href="manifest.json">
-<!-- Cambia #0e6b5c por #DC2626 -->
-<meta name="theme-color" content="#DC2626">  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#DC2626">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 
   <link rel="stylesheet" href="css/estilos.css">
 
@@ -39,8 +39,17 @@
 
   <main>
     <!-- ---- Sección 1: Catálogo (CSR) ---- -->
-    <section>
+    <section class="seccion-catalogo">
       <h2>Catálogo</h2>
+
+      <!-- Botones de Filtro por Categoría -->
+      <div class="filtros-categoria" role="group" aria-label="Filtrar por categoría">
+        <button type="button" class="btn-filtro activo" data-categoria="Todos">Todos</button>
+        <button type="button" class="btn-filtro" data-categoria="Rollos">Rollos</button>
+        <button type="button" class="btn-filtro" data-categoria="Entradas">Entradas</button>
+        <button type="button" class="btn-filtro" data-categoria="Especiales y bebidas">Especiales y bebidas</button>
+      </div>
+
       <!-- Este div empieza VACÍO a propósito: si ves el código fuente (Ctrl+U)
            no verás ningún producto aquí. JavaScript (csr.js) lo llena DESPUÉS
            de que la página ya cargó: por eso es "Renderizado en el Cliente" (CSR). -->
@@ -99,7 +108,7 @@
     <!-- </section> -->
   </main>
 
-<!-- ============ PIE DE PÁGINA / DATOS DEL NEGOCIO ============ -->
+  <!-- ============ PIE DE PÁGINA / DATOS DEL NEGOCIO ============ -->
   <footer class="footer">
     <div class="datos-negocio-directo">
       <div class="datos-header">
