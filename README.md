@@ -16,7 +16,7 @@
 |---|---|---|
 | 1 | efe0779 | 11/10/2026 |
 | 2 | b3ac272 | 18/10/2026 |
-| 3 | (hash del avance 3) | 25/10/2026 |
+| 3 | 02ae6bc | 25/10/2026 |
 | 4 | (se escribe en el reporte PDF) | 01/11/2026 |
 
 ## Comparación SSR vs CSR
