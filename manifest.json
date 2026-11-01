@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Casillas Sushi Bar",
   "short_name": "Sushi Bar",
-  "description": "PWA de ventas de práctica para la Unidad 2",
+  "description": "Ventas de Sushi y comida japonesa",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
